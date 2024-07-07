@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
-import Home from "../home/Home";
+// import Home from "../home/Home";
 import Profile from "../profile/Profile";
 import "./navbar.css";
 import HomeList from "../home/HomeList";
@@ -29,7 +29,7 @@ const Navbar = () => {
         </div>
       </nav>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomeList />} />
         <Route
           path="/profile"
           element={

@@ -1,7 +1,7 @@
 import React from "react";
 import "./home.css";
 
-const Home = ({ message }) => {
+const Home = ({ message, username, post }) => {
   return (
     <div className="home-container">
       <div className="profile-section">
@@ -10,14 +10,10 @@ const Home = ({ message }) => {
           alt="Profile"
           className="profile-pic"
         />
-        <h2>John Doe</h2>
+        <h2>{username}</h2>
       </div>
       <div className="post-section">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1DMedqtUivCWUDPGXMzItyOAZRu4roJqmPA&s"
-          alt="Post"
-          className="post-pic"
-        />
+        <img src={post} alt="Post" className="post-pic" />
       </div>
       <div className="actions-section">
         <button className="like-button">Like</button>
