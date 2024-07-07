@@ -1,0 +1,45 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #d1473f;
+  padding: 5px 10px;
+  color: white;
+}
+
+.nav-left,
+.nav-center,
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-home,
+.nav-profile {
+  color: white;
+  text-decoration: none;
+  margin-right: 10px;
+  font-size: 1.5rem;
+}
+
+.nav-home:hover,
+.nav-profile:hover {
+  text-decoration: none;
+  color: burlywood;
+  padding: 10px 0px;
+}
+.nav-home {
+  font-size: 2rem;
+}
+
+.nav-search {
+  padding: 5px;
+  border: none;
+  border-radius: 10px;
+}
+
+.nav-image {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}
