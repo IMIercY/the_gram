@@ -21,6 +21,7 @@ const Login = ({ userLogin }) => {
     );
     console.log(user);
     if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
       userLogin(user);
       NotificationSuccess("Login Successful");
       navigate("/");

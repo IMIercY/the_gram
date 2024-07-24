@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 // import Home from "../home/Home";
 import Profile from "../profile/Profile";
@@ -9,7 +9,18 @@ import "react-toastify/dist/ReactToastify.css";
 import Signup from "../../pages/login/Signup";
 
 const Navbar = () => {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const saveUser = JSON.parse(localStorage.getItem("user"));
+    if (saveUser) {
+      setUser(saveUser);
+    }
+  }, []);
+  const handleLogout = () => {
+    setUser(null);
+    localStorage.removeItem("user");
+  };
   const handleLogin = (userLogged) => {
     setUser(userLogged);
   };
@@ -25,16 +36,24 @@ const Navbar = () => {
           <input type="text" className="nav-search" placeholder="Search..." />
         </div>
         <div className="nav-right">
-          <Link to="/profile" className="nav-profile">
-            {user ? <div>Welcome, {user.username}</div> : "Guest"}
-            {/* Profile Picture */}
-          </Link>
-          <Link to="/login">
+          <div className="nav-profile">
+            {user ? (
+              <div>Welcome, {user.username}</div>
+            ) : (
+              <Link to="/login" className="nav-profile">
+                Login
+              </Link>
+            )}
+          </div>
+          <Link to="/profile">
             <img
-              src="https://cdn.britannica.com/35/233235-050-8DED07E3/Pug-dog.jpg"
+              src="https://media.istockphoto.com/id/485540631/photo/spy-in-tuxedo-aiming-gun.jpg?s=612x612&w=0&k=20&c=Lv58XFovMf4SK3W4iFDSQ7JxCunc8UA1HS_lEE3m07g="
               alt="Profile"
               className="nav-image"
             />
+          </Link>
+          <Link to="/">
+            {user ? <div onClick={handleLogout}>Logout</div> : ""}
           </Link>
         </div>
       </nav>

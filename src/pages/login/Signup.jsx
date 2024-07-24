@@ -1,21 +1,38 @@
 import React from "react";
 import { useState } from "react";
 import "./signup.css";
+import axios from "axios";
+import {
+  NotificationError,
+  NotificationSuccess,
+} from "../../components/Notification";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     if (password !== confirmPassword) {
       setError("Passwords do not match");
+      NotificationError("Passwd Not Match");
     } else {
       setError("");
       console.log("Form submitted", { username, password, confirmPassword });
       // Add signup logic here
+      const response = await axios.post("http://localhost:7777/users", {
+        username,
+        password,
+      });
+      if (response.status === 201) {
+        console.log(response);
+        NotificationSuccess("Sign Up Success}");
+        navigate("/login");
+      }
     }
   };
   return (
