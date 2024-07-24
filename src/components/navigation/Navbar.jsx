@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 // import Home from "../home/Home";
 import Profile from "../profile/Profile";
 import "./navbar.css";
-import HomeList from "../home/HomeList";
+import HomeList from "../../pages/home/HomeList";
+import Login from "../../pages/login/Login";
+import "react-toastify/dist/ReactToastify.css";
+import Signup from "../../pages/login/Signup";
 
 const Navbar = () => {
+  const [user, setUser] = useState("");
+  const handleLogin = (userLogged) => {
+    setUser(userLogged);
+  };
   return (
     <>
       <nav className="navbar">
@@ -19,13 +26,16 @@ const Navbar = () => {
         </div>
         <div className="nav-right">
           <Link to="/profile" className="nav-profile">
-            Profile Picture
+            {user ? <div>Welcome, {user.username}</div> : "Guest"}
+            {/* Profile Picture */}
           </Link>
-          <img
-            src="https://cdn.britannica.com/35/233235-050-8DED07E3/Pug-dog.jpg"
-            alt="Profile"
-            className="nav-image"
-          />
+          <Link to="/login">
+            <img
+              src="https://cdn.britannica.com/35/233235-050-8DED07E3/Pug-dog.jpg"
+              alt="Profile"
+              className="nav-image"
+            />
+          </Link>
         </div>
       </nav>
       <Routes>
@@ -45,6 +55,8 @@ const Navbar = () => {
             />
           }
         />
+        <Route path="/login" element={<Login userLogin={handleLogin} />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </>
   );
