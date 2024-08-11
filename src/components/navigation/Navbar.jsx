@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
-// import Home from "../home/Home";
-import Profile from "../profile/Profile";
+import { Link, useNavigate } from "react-router-dom";
 import "./navbar.css";
-import HomeList from "../../pages/home/HomeList";
-import Login from "../../pages/login/Login";
 import "react-toastify/dist/ReactToastify.css";
-import Signup from "../../pages/login/Signup";
+import MyRouter from "../../routes/MyRouter";
+// import CreatePost from "../Button/IconHeartAddLine";
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
-
+  const saveUser = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
-    const saveUser = JSON.parse(localStorage.getItem("user"));
     if (saveUser) {
       setUser(saveUser);
     }
@@ -21,9 +17,10 @@ const Navbar = () => {
     setUser(null);
     localStorage.removeItem("user");
   };
-  const handleLogin = (userLogged) => {
-    setUser(userLogged);
+  const handleLogin = (userLoggedFromRouter) => {
+    setUser(userLoggedFromRouter);
   };
+
   return (
     <>
       <nav className="navbar">
@@ -31,9 +28,19 @@ const Navbar = () => {
           <Link to="/" className="nav-home">
             The Gram
           </Link>
+          {user ? (
+            <Link to="/createPost">
+              <button className="create-post-button">Create Post</button>
+            </Link>
+          ) : (
+            <Link to="/login">
+              <button className="create-post-button">Create Post</button>
+            </Link>
+          )}
         </div>
         <div className="nav-center">
           <input type="text" className="nav-search" placeholder="Search..." />
+          {/* <CreatePost /> */}
         </div>
         <div className="nav-right">
           <div className="nav-profile">
@@ -52,13 +59,15 @@ const Navbar = () => {
               className="nav-image"
             />
           </Link>
-          <Link to="/">
-            {user ? <div onClick={handleLogout}>Logout</div> : ""}
+          <Link className="logout" to="/">
+            {user ? <div onClick={handleLogout}>Log out</div> : ""}
           </Link>
         </div>
       </nav>
-      <Routes>
-        <Route path="/" element={<HomeList />} />
+      <MyRouter userLogged={handleLogin} />
+
+      {/* <Routes>
+        <Route path="/" element={<Posts />} />
         <Route
           path="/profile"
           element={
@@ -76,7 +85,7 @@ const Navbar = () => {
         />
         <Route path="/login" element={<Login userLogin={handleLogin} />} />
         <Route path="/signup" element={<Signup />} />
-      </Routes>
+      </Routes> */}
     </>
   );
 };

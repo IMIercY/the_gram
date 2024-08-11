@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import "./profile.css";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./postForm.css";
+import { NotificationSuccess } from "../../components/Notification";
 
-const Profile = ({ bio }) => {
-  const [photo, setPhoto] = useState("");
-  const [username, setUsername] = useState("");
-  const [caption, setCaption] = useState("");
+const PostForm = () => {
+  const [post, setPhoto] = useState("");
+  const [user_name, setUsername] = useState("");
+  const [messages, setCaption] = useState("");
   const [posts, setPosts] = useState([]);
   const [editingPost, setEditingPost] = useState(null);
 
@@ -32,24 +33,32 @@ const Profile = ({ bio }) => {
     // formData.append("post", photo);
     // formData.append("user_name", username);
     // formData.append("messages", caption);
-
-    try {
-      if (editingPost) {
-        await axios.put(
-          `http://localhost:7777/posts/${editingPost.id}`,
-          formData
-        );
-        setEditingPost(null);
-      } else {
-        await axios.post("http://localhost:7777/posts", { formData });
+    // try {
+    if (editingPost) {
+      await axios.put(
+        `http://localhost:7777/posts/${editingPost.id}`,
+        formData
+      );
+      setEditingPost(null);
+    } else {
+      const res = await axios.post("http://localhost:7777/posts", {
+        post,
+        messages,
+        user_name,
+      });
+      console.log("Me");
+      console.log(res.status);
+      if (res.status === 201) {
+        NotificationSuccess("Post Success");
       }
-      fetchPosts();
-      setPhoto(null);
-      setUsername("");
-      setCaption("");
-    } catch (error) {
-      console.error("Error submitting form:", error);
     }
+    fetchPosts();
+    setPhoto("");
+    setUsername("");
+    setCaption("");
+    // } catch (error) {
+    //   console.error("Error submitting form:", error);
+    // }
   };
 
   const handleEdit = (post) => {
@@ -61,72 +70,51 @@ const Profile = ({ bio }) => {
   const handleDelete = async (postId) => {
     try {
       await axios.delete(`http://localhost:7777/posts/${postId}`);
-      alert("This post has been deleted");
       fetchPosts();
     } catch (error) {
       console.error("Error deleting post:", error);
     }
   };
+
   return (
     <>
-      <div className="profile-container">
-        <div className="profile-header">
-          <img
-            src="https://media.istockphoto.com/id/485540631/photo/spy-in-tuxedo-aiming-gun.jpg?s=612x612&w=0&k=20&c=Lv58XFovMf4SK3W4iFDSQ7JxCunc8UA1HS_lEE3m07g="
-            alt="Profile"
-            className="profile-picture"
-          />
-          <div className="profile-info">
-            <h2>Mark</h2>
-            <div className="profile-stats">
-              <span>100 posts</span>
-              <span>2K followers</span>
-              <span>50 following</span>
-            </div>
-          </div>
-          ;
-        </div>
-        <div className="profile-bio">
-          <p>{bio}</p>
-        </div>
-      </div>
-      ;{/* ///////// */}
       <div className="post-container">
         <form className="post-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Upload Photo:</label>
-            <input type="text" />
+            {/* <input type="file" onChange={handlePhotoChange} /> */}
             <input
               type="text"
-              value={photo}
+              value={post}
               onChange={(e) => setPhoto(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
             <label>Username:</label>
             <input
               type="text"
-              value={username}
+              value={user_name}
               onChange={(e) => setUsername(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
             <label>Caption:</label>
             <input
               type="text"
-              value={caption}
+              value={messages}
               onChange={(e) => setCaption(e.target.value)}
+              required
             />
           </div>
-          {/* <button className="submit-button" type="submit">
-            {editingPost ? "Update Post" : "Add Post"}
-          </button> */}
           <button className="submit-button" type="submit">
-            Update Post
+            {editingPost ? "Update Post" : "Add Post"}
           </button>
         </form>
       </div>
-      <div className="post-container">
+
+      {/* <div className="post-container">
         <div className="post-form">
           <h2>Own Posts</h2>
           {posts.map((post) => (
@@ -146,9 +134,9 @@ const Profile = ({ bio }) => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
 
-export default Profile;
+export default PostForm;

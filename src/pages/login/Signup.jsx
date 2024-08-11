@@ -17,7 +17,15 @@ const Signup = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (password !== confirmPassword) {
+
+    const response = await axios.get("http://localhost:7777/users");
+    console.log(response);
+    const checkUser = response.data.find((user) => user.username === username);
+    if (checkUser) {
+      console.log("checkUser", { checkUser });
+      setError("User already exits");
+      NotificationError("User already exits");
+    } else if (password !== confirmPassword) {
       setError("Passwords do not match");
       NotificationError("Passwd Not Match");
     } else {

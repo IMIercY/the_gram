@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Home from "./Home";
+import Post from "./Post";
 import axios from "axios";
 
-const HomeList = () => {
+const Posts = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     axios
@@ -15,7 +15,7 @@ const HomeList = () => {
   return (
     <div>
       {posts.map((item, index) => (
-        <Home
+        <Post
           key={index}
           message={item.messages}
           username={item.user_name}
@@ -26,4 +26,4 @@ const HomeList = () => {
   );
 };
 
-export default HomeList;
+export default Posts;

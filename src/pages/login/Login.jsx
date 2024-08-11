@@ -19,7 +19,7 @@ const Login = ({ userLogin }) => {
       (user) =>
         user.username === usernameInput && user.password === passwordInput
     );
-    console.log(user);
+    console.log("Login Page", { user });
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
       userLogin(user);
@@ -46,6 +46,7 @@ const Login = ({ userLogin }) => {
                 value={usernameInput}
                 onChange={(event) => setUsername(event.target.value)}
                 // required
+                autoFocus
               />
             </div>
             <div className="form-group">

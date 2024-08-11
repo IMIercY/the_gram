@@ -1,9 +1,9 @@
 import React from "react";
-import "./home.css";
+import "./post.css";
 
-const Home = ({ message, username, post }) => {
+const Post = ({ message, username, post }) => {
   return (
-    <div className="home-container">
+    <div className="post-container">
       <div className="profile-section">
         <img
           src="https://media.istockphoto.com/id/485540631/photo/spy-in-tuxedo-aiming-gun.jpg?s=612x612&w=0&k=20&c=Lv58XFovMf4SK3W4iFDSQ7JxCunc8UA1HS_lEE3m07g="
@@ -24,4 +24,4 @@ const Home = ({ message, username, post }) => {
   );
 };
 
-export default Home;
+export default Post;

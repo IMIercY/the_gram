@@ -1,0 +1,139 @@
+/* PostForm.css */
+
+.post-form-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: #f7f7f7;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.form-group input[type="file"],
+.form-group input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.submit-button {
+  justify-content: center;
+  align-self: center;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  border: none;
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.submit-button:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+}
+
+.submit-button:active {
+  transform: scale(1);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.posts-list {
+  margin-top: 30px;
+}
+
+.post-item {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.post-item img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.post-item p {
+  margin: 10px 0;
+}
+
+.edit-button,
+.delete-button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.edit-button {
+  background-color: #ffc107;
+  color: #fff;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.post-container {
+  max-width: 800px;
+  margin: 50px auto 0px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  box-shadow: 0px 0px 30px 20px rgba(177, 110, 110, 0.5);
+  text-align: center;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.post-section {
+  margin-bottom: 20px;
+}
+
+.post-pic {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.actions-section button {
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
