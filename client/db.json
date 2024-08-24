@@ -40,27 +40,24 @@
       "id": "eb34",
       "username": "mn",
       "password": "nm"
+    },
+    {
+      "id": "cae0",
+      "username": "new",
+      "password": "123"
+    },
+    {
+      "id": "8d09",
+      "username": "New-user",
+      "password": "123"
     }
   ],
   "posts": [
     {
-      "user_name": "Jam Me",
       "post": "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcQBaYSG9HopQSTZCiIsohdpSVJS63vdIiCJBPAQZkxBuaj3OzG2HGEqwHoDqmWP2IvL8kKpO-wARGXjZLI",
+      "user_name": "Supper Pig Bul",
       "messages": "My Lovely dog !",
-      "id": "d13f",
-      "like": [
-        {
-          "user_id": "1332434",
-          "date_of_like": "10/july/2024"
-        }
-      ],
-      "comment": [
-        {
-          "user_id": "1",
-          "describe": "Great post!",
-          "date_of_comment": "11/july/24"
-        }
-      ]
+      "id": "d13f"
     },
     {
       "user_name": "Mark",
@@ -75,10 +72,22 @@
       "user_name": "Marker"
     },
     {
-      "id": "80f1",
       "post": "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcQBaYSG9HopQSTZCiIsohdpSVJS63vdIiCJBPAQZkxBuaj3OzG2HGEqwHoDqmWP2IvL8kKpO-wARGXjZLI",
-      "messages": "third post",
-      "user_name": "Jan"
+      "user_name": "Doggy",
+      "messages": "Describe about my dog",
+      "id": "80f1"
+    },
+    {
+      "id": "1d5d",
+      "post": "https://t3.ftcdn.net/jpg/07/17/33/40/360_F_717334058_zZu41aMmrR0CvBxI3WLbWRjrqFyLAdW1.jpg",
+      "messages": "Cute cat",
+      "user_name": "Kitty"
+    },
+    {
+      "id": "e9fb",
+      "post": "https://img.freepik.com/premium-photo/cat-table-front-landscape-with-sunset-background_865967-63448.jpg",
+      "messages": "Beautuful cat",
+      "user_name": "Cat"
     }
   ]
 }

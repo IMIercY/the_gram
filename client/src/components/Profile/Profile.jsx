@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./profile.css";
 import axios from "axios";
+import { NotificationSuccess } from "../Notification";
 
 const Profile = ({ bio }) => {
-  const [photo, setPhoto] = useState("");
-  const [username, setUsername] = useState("");
-  const [caption, setCaption] = useState("");
+  const [post, setPhoto] = useState("");
+  const [user_name, setUsername] = useState("");
+  const [messages, setCaption] = useState("");
   const [posts, setPosts] = useState([]);
   const [editingPost, setEditingPost] = useState(null);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     fetchPosts();
@@ -28,23 +30,23 @@ const Profile = ({ bio }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const formData = new FormData();
-    // formData.append("post", photo);
-    // formData.append("user_name", username);
-    // formData.append("messages", caption);
-
     try {
       if (editingPost) {
-        await axios.put(
-          `http://localhost:7777/posts/${editingPost.id}`,
-          formData
-        );
+        // console.log(formData + "new mean ot");
+        await axios.put(`http://localhost:7777/posts/${editingPost.id}`, {
+          post,
+          user_name,
+          messages,
+        });
         setEditingPost(null);
+        alert("Done!");
+        NotificationSuccess("Posts have been updated");
       } else {
         await axios.post("http://localhost:7777/posts", { formData });
       }
+      setShowForm(false);
       fetchPosts();
-      setPhoto(null);
+      setPhoto("");
       setUsername("");
       setCaption("");
     } catch (error) {
@@ -53,14 +55,17 @@ const Profile = ({ bio }) => {
   };
 
   const handleEdit = (post) => {
+    setShowForm(!showForm);
     setEditingPost(post);
-    setUsername(post.username);
-    setCaption(post.caption);
+    setPhoto(post.post);
+    setUsername(post.user_name);
+    setCaption(post.messages);
   };
 
   const handleDelete = async (postId) => {
     try {
       await axios.delete(`http://localhost:7777/posts/${postId}`);
+      NotificationSuccess("This post has been deleted");
       alert("This post has been deleted");
       fetchPosts();
     } catch (error) {
@@ -90,42 +95,45 @@ const Profile = ({ bio }) => {
           <p>{bio}</p>
         </div>
       </div>
-      ;{/* ///////// */}
-      <div className="post-container">
-        <form className="post-form" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Upload Photo:</label>
-            <input type="text" />
-            <input
-              type="text"
-              value={photo}
-              onChange={(e) => setPhoto(e.target.value)}
-            />
-          </div>
-          <div className="form-group">
-            <label>Username:</label>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-          <div className="form-group">
-            <label>Caption:</label>
-            <input
-              type="text"
-              value={caption}
-              onChange={(e) => setCaption(e.target.value)}
-            />
-          </div>
-          {/* <button className="submit-button" type="submit">
+      {showForm && (
+        <div className="form-popup">
+          <form className="form-popup-content" onSubmit={handleSubmit}>
+            <span className="close-button" onClick={handleEdit}>
+              &times;
+            </span>
+            <div className="form-group">
+              <label>Upload Photo:</label>
+              <input
+                type="text"
+                value={post}
+                onChange={(e) => setPhoto(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label>Username:</label>
+              <input
+                type="text"
+                value={user_name}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label>Caption:</label>
+              <input
+                type="text"
+                value={messages}
+                onChange={(e) => setCaption(e.target.value)}
+              />
+            </div>
+            {/* <button className="submit-button" type="submit">
             {editingPost ? "Update Post" : "Add Post"}
           </button> */}
-          <button className="submit-button" type="submit">
-            Update Post
-          </button>
-        </form>
-      </div>
+            <button className="button-update" type="submit">
+              Update Post
+            </button>
+          </form>
+        </div>
+      )}
       <div className="post-container">
         <div className="post-form">
           <h2>Own Posts</h2>
