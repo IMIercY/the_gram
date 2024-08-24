@@ -70,24 +70,24 @@ app.use(morgan(":method - :url - :date - :response-time ms"));
 app.use("/api", api);
 // app.use("/", home);
 
-// Promise.all([connectToDb()])
-//   .then(() =>
-//     app.listen(PORT, () =>
-//       console.log(`My App(The-Gram) is cooking on port ${PORT}!`)
-//     )
-//   )
-//   .catch((error) => {
-//     console.error(`MongoDB Atlas Error: ${error}`);
-//     process.exit();
-//   });
-
 Promise.all([connectToDb()])
   .then(() =>
-    app.listen(8000, () =>
-      console.log(`My App(The-Gram) is cooking on port 8000!`)
+    app.listen(PORT, () =>
+      console.log(`My App(The-Gram) is cooking on port ${PORT}!`)
     )
   )
   .catch((error) => {
     console.error(`MongoDB Atlas Error: ${error}`);
     process.exit();
   });
+
+// Promise.all([connectToDb()])
+//   .then(() =>
+//     app.listen(8000, () =>
+//       console.log(`My App(The-Gram) is cooking on port 8000!`)
+//     )
+//   )
+//   .catch((error) => {
+//     console.error(`MongoDB Atlas Error: ${error}`);
+//     process.exit();
+//   });
